@@ -1,0 +1,8 @@
+.links {
+    display: flex;
+}
+
+h3 {
+    margin:10px;
+    cursor: pointer;
+}

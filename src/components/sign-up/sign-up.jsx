@@ -6,10 +6,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { Link } from 'react-router-dom';
+
 const schema = yup.object({
         name:yup.string().required().min(6),
-        email:yup.string().required(),
-        password:yup.string().required(),
+        email:yup.string().required('Please enter a valid email'),
+        password:yup.string().required('Please enter a password').matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+            'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+        )
     });
 
 const SignUp = () => {
@@ -18,7 +23,7 @@ const SignUp = () => {
         {resolver: yupResolver(schema)}
     );
     
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (values) => console.log(values);
 
     return(
     <div className="sign-up">
@@ -31,6 +36,7 @@ const SignUp = () => {
                     <div key={key}>
                         <label htmlFor={input.name}>{input.label}</label>
                         <br/>
+                        {/*<input type={input.type} name={input.name} ref={register}/>*/}
                         <input {...register('name')}/> 
                         {errors.name && <p>{input.name} is required</p>}
                     </div>
@@ -44,8 +50,10 @@ const SignUp = () => {
                 <option value="Owner">Owner</option>
             </select>
 
-            <button type="submit">Sign Up</button>
+            <button>Sign Up</button>
         </form>
+        <p>Have an account? <Link to='/signin'>Sign In!</Link></p>
+        <p><Link to='/'>Back to Home</Link></p>
     </div>
     );
 }

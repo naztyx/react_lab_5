@@ -2,6 +2,7 @@ import React from 'react';
 import './sign-in.css'
 import site_contents from '../../static/forms_input';
 
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
 
@@ -24,7 +25,8 @@ const SignIn = () => {
 
             <button>Sign In</button>
         </form>
-        <p>Don't have account? Sign Up!</p>
+        <p>Don't have account? <Link to='/signup'>Sign Up!</Link></p>
+        <p><Link to='/'>Back to Home</Link></p>
     </div>
     );
 }
