@@ -1,23 +1,32 @@
 import React from 'react';
 import './sign-in.css'
+import site_contents from '../../static/forms_input';
 
-const SignIn = () => (
+
+const SignIn = () => {
+
+    return(
     <div className='sign-in'>
         <h1>Have an account already?</h1>
         <h3>Sign-in here!</h3>
 
         <form>
-            <label for="email">E-mail</label>
-            <input name="email" type="email"></input>
-            <label for="password">Password</label>
-            <input name="password" type="password" />            
-            <label for="text">Project Name</label>
-            <input name="text" type="text"></input>
+        {site_contents.inputs2.map((input,key) =>{
+                return(
+                    <div key={key}>
+                        <label htmlFor={input.name}>{input.label}</label>
+                        <br></br>
+                        <input type={input.type} name={input.name} />
+                    </div>
+                )
+            })            
+            }
 
             <button>Sign In</button>
         </form>
         <p>Don't have account? Sign Up!</p>
     </div>
-)
+    );
+}
 
 export default SignIn;
